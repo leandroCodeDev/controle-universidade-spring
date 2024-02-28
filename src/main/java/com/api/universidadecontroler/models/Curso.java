@@ -6,17 +6,17 @@ public class Curso {
     private int id;
     private String nome;
     private String descricao;
-    private int vargaHoraria;
+    private int cargaHoraria;
 
     private static int  gerarIdAluno(){
         return contador++;
     }
 
-    public Curso(String nome, String descricao, int vargaHoraria) {
+    public Curso(String nome, String descricao, int cargaHoraria) {
         this.id = contador;
         this.nome = nome;
         this.descricao = descricao;
-        this.vargaHoraria = vargaHoraria;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public int getId() {
@@ -39,11 +39,11 @@ public class Curso {
         this.descricao = descricao;
     }
 
-    public int getVargaHoraria() {
-        return vargaHoraria;
+    public int getCargaHoraria() {
+        return cargaHoraria;
     }
 
-    public void setVargaHoraria(int vargaHoraria) {
-        this.vargaHoraria = vargaHoraria;
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 }

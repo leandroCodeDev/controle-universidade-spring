@@ -12,6 +12,12 @@ public class Aluno {
         return contador++;
     }
 
+    public Aluno(String nome, Date dataNascimento) {
+        this.id = gerarIdAluno();
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
     public int getId() {
         return id;
     }

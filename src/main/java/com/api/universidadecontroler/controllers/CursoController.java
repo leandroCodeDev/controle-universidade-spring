@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/curso")
 public class CursoController {
 
     final CursoService cursoService;

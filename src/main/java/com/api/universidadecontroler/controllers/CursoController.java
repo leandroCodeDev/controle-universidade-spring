@@ -1,45 +1,47 @@
 package com.api.universidadecontroler.controllers;
 
 import com.api.universidadecontroler.dtos.AlunoDto;
+import com.api.universidadecontroler.dtos.CursoDto;
 import com.api.universidadecontroler.services.AlunoService;
+import com.api.universidadecontroler.services.CursoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/curso")
 public class CursoController {
 
-    final AlunoService alunoService;
+    final CursoService cursoService;
 
-    public CursoController(AlunoService alunoService) {
-        this.alunoService = alunoService;
+    public CursoController(CursoService cursoService) {
+        this.cursoService = cursoService;
     }
 
 
 
     @GetMapping
-    public List<AlunoDto> get() {
-        return alunoService.buscarTodos();
+    public List<CursoDto> get() {
+        return cursoService.buscarTodos();
     }
 
 
     /** Busca por ID */
     @GetMapping("{id}")
-    public AlunoDto getId(@PathVariable Integer id){
-        return alunoService.buscarPorId(id);
+    public CursoDto getId(@PathVariable Integer id){
+        return cursoService.buscarPorId(id);
     }
 
     @GetMapping("{id}")
-    public boolean update(@PathVariable Integer id,@RequestBody AlunoDto dto) throws ParseException {
-        return alunoService.update(id,dto);
+    public boolean update(@PathVariable Integer id,@RequestBody CursoDto dto) throws ParseException {
+        return cursoService.update(id,dto);
     }
 
 
     @PostMapping("")
-    public AlunoDto create(@RequestBody AlunoDto dto) throws Exception {
-        return alunoService.cadastrar(dto);
+    public CursoDto create(@RequestBody CursoDto dto) throws Exception {
+        return cursoService.cadastrar(dto);
     }
 
 

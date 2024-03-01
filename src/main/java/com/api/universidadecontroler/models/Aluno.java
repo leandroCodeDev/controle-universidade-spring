@@ -1,8 +1,14 @@
 package com.api.universidadecontroler.models;
 
+import com.api.universidadecontroler.dtos.AlunoDto;
+import com.api.universidadecontroler.helpers.DataHelper;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 public class Aluno {
 
+    private static ArrayList<Aluno> alunos = new ArrayList<>();
     private static int contador = 1;
     private int id;
     private String nome;
@@ -16,6 +22,14 @@ public class Aluno {
         this.id = gerarIdAluno();
         this.nome = nome;
         this.dataNascimento = dataNascimento;
+    }
+
+    public static boolean incluirAluno(Aluno aluno) {
+        return alunos.add(aluno);
+    }
+
+    public static ArrayList<Aluno> getAlunos() {
+        return alunos;
     }
 
     public int getId() {

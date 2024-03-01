@@ -8,7 +8,6 @@ import com.api.universidadecontroler.models.Aluno;
 import com.api.universidadecontroler.models.Curso;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class CursoService {
     }
 
     public List<CursoDto> buscarTodos() {
-        ArrayList list = new ArrayList<CursoDto>();
+        ArrayList<CursoDto> list = new ArrayList<>();
         for (Curso curso : Curso.getCursos()) {
             CursoDto dto = new CursoDto(curso.getId(), curso.getNome(), curso.getDescricao(), curso.getCargaHoraria());
             for(Aluno a: curso.getAlunos()){
@@ -74,6 +73,20 @@ public class CursoService {
             }
         }
         return false;
+    }
+
+
+    public boolean delete(Integer id) {
+        Curso curso = null;
+        for (Curso c : Curso.getCursos()) {
+            if (c.getId() == id) {
+                curso = c;
+            }
+        }
+        if(curso == null){
+            return false;
+        }
+        return Curso.getCursos().remove(curso);
     }
 
     public boolean matricularAluno(Integer idCurso, MatriculaDTO matriculaDTO) throws Exception {

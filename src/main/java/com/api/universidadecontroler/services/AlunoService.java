@@ -3,6 +3,7 @@ package com.api.universidadecontroler.services;
 import com.api.universidadecontroler.dtos.AlunoDto;
 import com.api.universidadecontroler.helpers.DataHelper;
 import com.api.universidadecontroler.models.Aluno;
+import com.api.universidadecontroler.models.Curso;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -58,6 +59,24 @@ public class AlunoService {
             }
         }
         return false;
+    }
+
+    public boolean delete(Integer id){
+        Aluno aluno = null;
+        for (Aluno a : Aluno.getAlunos()) {
+            if (a.getId() == id) {
+                aluno = a;
+            }
+        }
+        if(aluno == null){
+            return false;
+        }
+        for(Curso c:Curso.getCursos()){
+            c.getAlunos().remove(aluno);
+        }
+        Aluno.getAlunos().remove(aluno);
+
+        return true;
     }
 
     private boolean alunoJaCadastrado(AlunoDto dto) {

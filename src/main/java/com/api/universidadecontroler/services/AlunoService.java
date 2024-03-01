@@ -13,28 +13,32 @@ import java.util.List;
 @Service
 public class AlunoService {
 
-    public AlunoDto cadastrar(AlunoDto dto ) throws Exception {
-        Aluno aluno = new Aluno(dto.nome, DataHelper.converterStringParaData(dto.dataNascimento));
-
-        if(!Aluno.incluirAluno(aluno)){
-            throw  new Exception("Ocorreu um erro ao tentar adicionar aluno no \"banco de dados\"");
+    public AlunoDto cadastrar(AlunoDto dto) throws Exception {
+        if (alunoJaCadastrado(dto)) {
+            throw new Exception("aluno ja cadastrado na instituição");
         }
-        return new AlunoDto(aluno.getId(),aluno.getNome(),DataHelper.converterDataParaString(aluno.getDataNascimento()));
+        Aluno aluno = new Aluno(dto.nome, DataHelper.converterStringParaData(dto.dataNascimento));
+        if (!Aluno.incluirAluno(aluno)) {
+            throw new Exception("Ocorreu um erro ao tentar adicionar aluno no \"banco de dados\"");
+        }
+        return new AlunoDto(aluno.getId(), aluno.getNome(), DataHelper.converterDataParaString(aluno.getDataNascimento()));
+
 
     }
 
-    public List<AlunoDto> buscarTodos(){
+    public List<AlunoDto> buscarTodos() {
         ArrayList list = new ArrayList<AlunoDto>();
-        for(Aluno aluno:Aluno.getAlunos()){
-            AlunoDto dto = new AlunoDto(aluno.getId(),aluno.getNome(),DataHelper.converterDataParaString(aluno.getDataNascimento()));
+        for (Aluno aluno : Aluno.getAlunos()) {
+            AlunoDto dto = new AlunoDto(aluno.getId(), aluno.getNome(), DataHelper.converterDataParaString(aluno.getDataNascimento()));
             list.add(dto);
         }
         return list;
     }
-    public AlunoDto buscarPorId(Integer id){
-        for(Aluno aluno:Aluno.getAlunos()){
-            if(aluno.getId() == id){
-                return new AlunoDto(aluno.getId(),aluno.getNome(),DataHelper.converterDataParaString(aluno.getDataNascimento()));
+
+    public AlunoDto buscarPorId(Integer id) {
+        for (Aluno aluno : Aluno.getAlunos()) {
+            if (aluno.getId() == id) {
+                return new AlunoDto(aluno.getId(), aluno.getNome(), DataHelper.converterDataParaString(aluno.getDataNascimento()));
             }
         }
         return new AlunoDto();
@@ -42,16 +46,23 @@ public class AlunoService {
 
 
     public boolean update(Integer id, AlunoDto dto) throws ParseException {
-        for(Aluno aluno:Aluno.getAlunos()){
-            if(aluno.getId() == id){
-                if(!dto.nome.isBlank()){
+        for (Aluno aluno : Aluno.getAlunos()) {
+            if (aluno.getId() == id) {
+                if (!dto.nome.isBlank()) {
                     aluno.setNome(dto.nome);
                 }
-                if(!dto.dataNascimento.isBlank()){
+                if (!dto.dataNascimento.isBlank()) {
                     aluno.setDataNascimento(DataHelper.converterStringParaData(dto.dataNascimento));
                 }
                 return true;
             }
+        }
+        return false;
+    }
+
+    private boolean alunoJaCadastrado(AlunoDto dto) {
+        for (Aluno a : Aluno.getAlunos()) {
+            return (a.getNome().equalsIgnoreCase(dto.nome));
         }
         return false;
     }

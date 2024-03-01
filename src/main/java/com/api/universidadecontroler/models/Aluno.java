@@ -9,12 +9,12 @@ import java.util.Date;
 public class Aluno {
 
     private static ArrayList<Aluno> alunos = new ArrayList<>();
-    private static int contador = 1;
-    private int id;
+    private static Integer contador = 1;
+    private Integer id;
     private String nome;
     private Date dataNascimento;
 
-    private static int  gerarIdAluno(){
+    private static Integer  gerarIdAluno(){
         return contador++;
     }
 
@@ -32,7 +32,7 @@ public class Aluno {
         return alunos;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

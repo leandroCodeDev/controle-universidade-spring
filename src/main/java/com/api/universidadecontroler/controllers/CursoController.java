@@ -33,7 +33,7 @@ public class CursoController {
         return cursoService.buscarPorId(id);
     }
 
-    @GetMapping("{id}")
+    @PutMapping("{id}")
     public boolean update(@PathVariable Integer id,@RequestBody CursoDto dto) throws ParseException {
         return cursoService.update(id,dto);
     }

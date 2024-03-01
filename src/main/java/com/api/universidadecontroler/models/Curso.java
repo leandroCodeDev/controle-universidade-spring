@@ -6,13 +6,13 @@ public class Curso {
 
     private static ArrayList<Curso> cursos = new ArrayList<>();
 
-    private static int contador = 1;
-    private int id;
+    private static Integer contador = 1;
+    private Integer id;
     private String nome;
     private String descricao;
     private int cargaHoraria;
 
-    private static int  gerarIdAluno(){
+    private static Integer  gerarIdAluno(){
         return contador++;
     }
 
@@ -23,7 +23,7 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -29,7 +29,7 @@ public class CursoService {
         }
         return list;
     }
-    public CursoDto buscarPorId(int id){
+    public CursoDto buscarPorId(Integer id){
         for(Curso curso:Curso.getCursos()){
             if(curso.getId() == id){
                 return new CursoDto(curso.getId(),curso.getNome(),curso.getDescricao(),curso.getCargaHoraria());

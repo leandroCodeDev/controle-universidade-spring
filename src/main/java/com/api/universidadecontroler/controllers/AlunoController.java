@@ -30,7 +30,7 @@ public class AlunoController {
         return alunoService.buscarPorId(id);
     }
 
-    @GetMapping("{id}")
+    @PutMapping("{id}")
     public boolean update(@PathVariable Integer id,@RequestBody AlunoDto dto) throws ParseException {
         return alunoService.update(id,dto);
     }

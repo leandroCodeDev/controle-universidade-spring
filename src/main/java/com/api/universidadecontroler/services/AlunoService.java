@@ -31,7 +31,7 @@ public class AlunoService {
         }
         return list;
     }
-    public AlunoDto buscarPorId(int id){
+    public AlunoDto buscarPorId(Integer id){
         for(Aluno aluno:Aluno.getAlunos()){
             if(aluno.getId() == id){
                 return new AlunoDto(aluno.getId(),aluno.getNome(),DataHelper.converterDataParaString(aluno.getDataNascimento()));

@@ -1,13 +1,13 @@
 package com.api.universidadecontroler.dtos;
 
 public class AlunoDto {
-    public int id;
+    public Integer id;
     public String nome;
     public String dataNascimento;
 
 
     public AlunoDto() {}
-    public AlunoDto(int id, String nome, String dataNascimento) {
+    public AlunoDto(Integer id, String nome, String dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;

@@ -2,6 +2,7 @@ package com.api.universidadecontroler.controllers;
 
 import com.api.universidadecontroler.dtos.AlunoDto;
 import com.api.universidadecontroler.dtos.CursoDto;
+import com.api.universidadecontroler.dtos.MatriculaDTO;
 import com.api.universidadecontroler.services.AlunoService;
 import com.api.universidadecontroler.services.CursoService;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,6 @@ public class CursoController {
     public CursoController(CursoService cursoService) {
         this.cursoService = cursoService;
     }
-
 
 
     @GetMapping
@@ -42,6 +42,11 @@ public class CursoController {
     @PostMapping("")
     public CursoDto create(@RequestBody CursoDto dto) throws Exception {
         return cursoService.cadastrar(dto);
+    }
+
+    @PostMapping("{idCurso}")
+    public boolean matricularAluno(@PathVariable Integer idCurso, @RequestBody MatriculaDTO matriculaDTO) throws Exception {
+        return cursoService.matricularAluno(idCurso,matriculaDTO);
     }
 
 

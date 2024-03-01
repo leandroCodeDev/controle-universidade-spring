@@ -35,6 +35,11 @@ public class AlunoController {
         return alunoService.update(id,dto);
     }
 
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) throws ParseException {
+        return alunoService.delete(id);
+    }
+
 
     @PostMapping("")
     public AlunoDto create(@RequestBody AlunoDto dto) throws Exception {

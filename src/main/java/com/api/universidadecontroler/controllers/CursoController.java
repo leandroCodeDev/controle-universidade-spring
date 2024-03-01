@@ -1,8 +1,7 @@
 package com.api.universidadecontroler.controllers;
 
-import com.api.universidadecontroler.dtos.AlunoDto;
 import com.api.universidadecontroler.dtos.CursoDto;
-import com.api.universidadecontroler.services.AlunoService;
+import com.api.universidadecontroler.dtos.MatriculaDTO;
 import com.api.universidadecontroler.services.CursoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,6 @@ public class CursoController {
     }
 
 
-
     @GetMapping
     public List<CursoDto> get() {
         return cursoService.buscarTodos();
@@ -34,14 +32,23 @@ public class CursoController {
     }
 
     @PutMapping("{id}")
-    public boolean update(@PathVariable Integer id,@RequestBody CursoDto dto) throws ParseException {
+    public boolean update(@PathVariable Integer id,@RequestBody CursoDto dto){
         return cursoService.update(id,dto);
     }
 
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id){
+        return cursoService.delete(id);
+    }
 
     @PostMapping("")
     public CursoDto create(@RequestBody CursoDto dto) throws Exception {
         return cursoService.cadastrar(dto);
+    }
+
+    @PostMapping("{idCurso}/matricular")
+    public boolean matricularAluno(@PathVariable Integer idCurso, @RequestBody MatriculaDTO matriculaDTO) throws Exception {
+        return cursoService.matricularAluno(idCurso,matriculaDTO);
     }
 
 

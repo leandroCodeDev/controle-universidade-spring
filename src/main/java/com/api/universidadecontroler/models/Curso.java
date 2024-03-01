@@ -10,13 +10,14 @@ public class Curso {
     private Integer id;
     private String nome;
     private String descricao;
-    private int cargaHoraria;
+    private Integer cargaHoraria;
+    private ArrayList<Aluno> alunos = new ArrayList<>();
 
     private static Integer  gerarIdAluno(){
         return contador++;
     }
 
-    public Curso(String nome, String descricao, int cargaHoraria) {
+    public Curso(String nome, String descricao, Integer cargaHoraria) {
         this.id = contador;
         this.nome = nome;
         this.descricao = descricao;
@@ -43,11 +44,11 @@ public class Curso {
         this.descricao = descricao;
     }
 
-    public int getCargaHoraria() {
+    public Integer getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
+    public void setCargaHoraria(Integer cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
@@ -56,5 +57,12 @@ public class Curso {
     }
     public static ArrayList<Curso> getCursos() {
         return cursos;
+    }
+    public ArrayList<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public boolean matricularAluno(Aluno aluno){
+        return alunos.add(aluno);
     }
 }

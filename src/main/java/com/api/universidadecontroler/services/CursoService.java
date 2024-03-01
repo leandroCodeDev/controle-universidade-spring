@@ -18,6 +18,9 @@ public class CursoService {
 
 
     public CursoDto cadastrar(CursoDto dto) throws Exception {
+        if(cursoJaCadastrado(dto)){
+            throw new Exception("Curso ja cadastrado na instituição");
+        }
         Curso curso = new Curso(dto.nome, dto.descricao, dto.cargaHoraria);
 
         if (!Curso.incluirCurso(curso)) {
@@ -73,7 +76,7 @@ public class CursoService {
         return false;
     }
 
-    public boolean matricularAluno(Integer idCurso, MatriculaDTO matriculaDTO) {
+    public boolean matricularAluno(Integer idCurso, MatriculaDTO matriculaDTO) throws Exception {
         Curso curso = null;
         Aluno aluno = null;
         for (Curso c : Curso.getCursos()) {
@@ -90,6 +93,24 @@ public class CursoService {
             return false;
         }
 
+        if(alunoJaMatriculado(curso,aluno)){
+            throw new Exception("aluno ja cadastrado no curso da instituição");
+        }
+
         return curso.matricularAluno(aluno);
+    }
+
+    private boolean alunoJaMatriculado(Curso curso, Aluno aluno) {
+        for (Aluno a : curso.getAlunos()) {
+            return (a.getId() == aluno.getId());
+        }
+        return false;
+    }
+
+    private boolean cursoJaCadastrado(CursoDto dto) {
+        for (Curso c : Curso.getCursos()) {
+            return (c.getNome().equalsIgnoreCase(dto.nome));
+        }
+        return false;
     }
 }

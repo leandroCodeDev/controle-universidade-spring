@@ -1,6 +1,10 @@
 package com.api.universidadecontroler.models;
 
+import java.util.ArrayList;
+
 public class Curso {
+
+    private static ArrayList<Curso> cursos = new ArrayList<>();
 
     private static int contador = 1;
     private int id;
@@ -45,5 +49,12 @@ public class Curso {
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
+    }
+
+    public static boolean incluirCurso(Curso Curso) {
+        return cursos.add(Curso);
+    }
+    public static ArrayList<Curso> getCursos() {
+        return cursos;
     }
 }

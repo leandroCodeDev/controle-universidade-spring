@@ -3,7 +3,7 @@
 
 ## PROJETO
 
-Este é um sistema de gerenciamento de cursos e alunos de uma universidade, seja para um colégio ou universidade. Foi criado como um exercício do curso [Floripa Mais Tec](https://floripamaistec.pmf.sc.gov.br), durante o módulo de Spring, lecionado por [André Nunes](https://github.com/andresnunes) e [Gabriel Augustin](https://github.com/AugustinGabriel).
+Este é um sistema de gerenciamento de cursos e alunos de uma universidade. Foi criado como um exercício do curso [Floripa Mais Tec](https://floripamaistec.pmf.sc.gov.br), durante o módulo de Spring, lecionado por [Gabriel Augustin](https://github.com/AugustinGabriel).
 
 ## TECH
 

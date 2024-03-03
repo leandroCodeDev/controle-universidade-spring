@@ -14,6 +14,12 @@ import java.util.List;
 @Service
 public class AlunoService {
 
+    private CursoService cursoService;
+
+    public void setCursoService(CursoService cursoService) {
+        this.cursoService = cursoService;
+    }
+
     public AlunoDto cadastrar(AlunoDto dto) throws Exception {
         if (alunoJaCadastrado(dto)) {
             throw new Exception("aluno ja cadastrado na instituição");
@@ -45,6 +51,15 @@ public class AlunoService {
         return new AlunoDto();
     }
 
+    public Aluno buscarAlunoPorId(Integer id) {
+        for (Aluno aluno : Aluno.getAlunos()) {
+            if (aluno.getId() == id) {
+                return aluno;
+            }
+        }
+        return null;
+    }
+
 
     public boolean update(Integer id, AlunoDto dto) throws ParseException {
         for (Aluno aluno : Aluno.getAlunos()) {
@@ -71,13 +86,14 @@ public class AlunoService {
         if(aluno == null){
             return false;
         }
-        for(Curso c:Curso.getCursos()){
-            c.getAlunos().remove(aluno);
-        }
+        cursoService.removerAluno(id);
+
         Aluno.getAlunos().remove(aluno);
 
         return true;
     }
+
+
 
     private boolean alunoJaCadastrado(AlunoDto dto) {
         for (Aluno a : Aluno.getAlunos()) {
@@ -85,4 +101,5 @@ public class AlunoService {
         }
         return false;
     }
+
 }

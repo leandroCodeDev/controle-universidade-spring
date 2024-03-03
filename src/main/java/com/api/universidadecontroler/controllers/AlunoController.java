@@ -2,6 +2,8 @@ package com.api.universidadecontroler.controllers;
 
 import com.api.universidadecontroler.dtos.AlunoDto;
 import com.api.universidadecontroler.services.AlunoService;
+import com.api.universidadecontroler.services.CursoService;
+import com.api.universidadecontroler.services.MainService;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
@@ -10,10 +12,12 @@ import java.util.List;
 @RequestMapping("/aluno")
 public class AlunoController {
 
-    final AlunoService alunoService;
+    private final AlunoService alunoService;
 
-    public AlunoController(AlunoService alunoService) {
-        this.alunoService = alunoService;
+    public AlunoController(MainService mainService) {
+
+        this.alunoService = mainService.getAlunoService();
+        this.alunoService.setCursoService(mainService.getCursoService());
     }
 
 

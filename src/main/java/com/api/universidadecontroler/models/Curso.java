@@ -1,6 +1,7 @@
 package com.api.universidadecontroler.models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Curso {
 
@@ -13,12 +14,12 @@ public class Curso {
     private Integer cargaHoraria;
     private ArrayList<Aluno> alunos = new ArrayList<>();
 
-    private static Integer  gerarIdAluno(){
+    private static Integer gerarIdAluno() {
         return contador++;
     }
 
     public Curso(String nome, String descricao, Integer cargaHoraria) {
-        this.id = contador;
+        this.id = contador++;
         this.nome = nome;
         this.descricao = descricao;
         this.cargaHoraria = cargaHoraria;
@@ -55,14 +56,29 @@ public class Curso {
     public static boolean incluirCurso(Curso Curso) {
         return cursos.add(Curso);
     }
+
     public static ArrayList<Curso> getCursos() {
         return cursos;
     }
+
     public ArrayList<Aluno> getAlunos() {
         return alunos;
     }
 
-    public boolean matricularAluno(Aluno aluno){
+    public boolean matricularAluno(Aluno aluno) {
         return alunos.add(aluno);
+    }
+
+    public static void removerAluno(Integer id) {
+        // Usando um iterator para evitar ConcurrentModificationException ao modificar a lista durante a iteração
+        for(Curso c: cursos) {
+            Iterator<Aluno> iterator = c.getAlunos().iterator();
+            while (iterator.hasNext()) {
+                Aluno aluno = iterator.next();
+                if (aluno.getId() == id) {
+                    iterator.remove(); // Remove o elemento atual do iterator e, consequentemente, da lista
+                }
+            }
+        }
     }
 }

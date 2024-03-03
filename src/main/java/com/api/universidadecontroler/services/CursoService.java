@@ -15,6 +15,12 @@ import java.util.List;
 @Service
 public class CursoService {
 
+    private AlunoService alunoService;
+
+    public void setAlunoService(AlunoService alunoService){
+        this.alunoService = alunoService;
+    }
+
 
     public CursoDto cadastrar(CursoDto dto) throws Exception {
         if(cursoJaCadastrado(dto)){
@@ -97,11 +103,9 @@ public class CursoService {
                 curso = c;
             }
         }
-        for (Aluno a : Aluno.getAlunos()) {
-            if (a.getId() == matriculaDTO.getIdAluno()) {
-                aluno = a;
-            }
-        }
+
+        aluno = alunoService.buscarAlunoPorId(matriculaDTO.getIdAluno());
+
         if (aluno == null || curso == null) {
             return false;
         }
@@ -113,6 +117,11 @@ public class CursoService {
         return curso.matricularAluno(aluno);
     }
 
+    public void removerAluno(Integer idAluno){
+        Curso.removerAluno(idAluno);
+    }
+
+
     private boolean alunoJaMatriculado(Curso curso, Aluno aluno) {
         for (Aluno a : curso.getAlunos()) {
             return (a.getId() == aluno.getId());
@@ -120,10 +129,14 @@ public class CursoService {
         return false;
     }
 
+
+
     private boolean cursoJaCadastrado(CursoDto dto) {
         for (Curso c : Curso.getCursos()) {
             return (c.getNome().equalsIgnoreCase(dto.nome));
         }
         return false;
     }
+
+
 }
